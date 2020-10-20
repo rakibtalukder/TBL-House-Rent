@@ -1,0 +1,75 @@
+{% extends 'executive_base.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">BTS List</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>BTS ID</th>
+          <th>Name</th>
+          <th>Owner Name</th>
+          <th>Address</th>
+            <th>Month Rent</th>
+            <th>Contract Period</th>
+            <th>Contract Date</th>
+          <th>Increment After (Years)</th>
+          <th>Increment Amount</th>
+          <th>Increment Eligibility</th>
+          <th>Status</th>
+
+        </tr>
+      </thead>
+      {% for d in agreement %}
+      <tr>
+        <td> {{d.agreementid}}</td>
+        <td> {{d.name}}</td>
+        <td>{{d.hownername}}</td>
+        <td>{{d.address}}</td>
+          <td>{{d.monthrent}}</td>
+          <td>{{d.contractperiod}}</td>
+          <td>{{d.startdate}}</td>
+        <td>{{d.increment}}</td>
+        <td>{{d.incrementamount}}</td>
+        {%if d.incrementstatus%}
+          <td> <span class="label label-success">Eligible</span></td>
+          {% else %}
+          <td> <span class="label label-danger">Not Eligible</span></td>
+          {% endif %}
+        {%if d.status%}
+          <td> <span class="label label-success">Approved</span></td>
+          {% else %}
+          <td> <span class="label label-danger">Hold</span></td>
+          {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+{% endblock content %}

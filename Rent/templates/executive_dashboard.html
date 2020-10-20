@@ -1,0 +1,76 @@
+{% extends 'executive_base.html' %}
+{% load static %}
+{% block content %}
+{%include 'executive_dashboard_card.html'%}
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary col-md-5" style="margin-left:2%;">
+      <div class="panel-heading" style="text-align:center;">
+        <h6 class="panel-title">Recent Agreement</h6>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>House Owner Name</th>
+            <th>Status</th>
+
+          </tr>
+        </thead>
+        {% for d in agreement %}
+        <tr>
+          <td> {{d.name}}</td>
+          <td>{{d.address}}</td>
+          <td>{{d.hownername}}</td>
+          {%if d.status%}
+          <td> <span class="label label-primary">Permanent</span></td>
+          {% else %}
+          <td> <span class="label label-danger">Hold</span></td>
+          {% endif %}
+
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="panel panel-primary col-md-5" style="margin-left:5%;">
+      <div class="panel-heading" style="text-align:center;">
+        <h6 class="panel-title">Recent Rents</h6>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Paying Date</th>
+             <th>Months</th>
+            <th>Month Rent</th>
+             <th>Total Rent</th>
+
+            <th>Status</th>
+
+          </tr>
+        </thead>
+        {% for p in rent %}
+        <tr>
+          <td> {{p.btsname}}</td>
+          <td>{{p.todate}}</td>
+          <td>{{p.totalmonth}}</td>
+          <td>{{p.monthrent}}</td>
+          <td>{{p.totalrent}}</td>
+          {%if p.status%}
+          <td> <span class="label label-success">Paid</span></td>
+          {% else %}
+          <td> <span class="label label-danger">Hold</span></td>
+          {% endif %}
+
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

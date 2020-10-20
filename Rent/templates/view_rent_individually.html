@@ -1,0 +1,79 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Rent List</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Agreement ID</th>
+          <th>Name</th>
+          <th>House Owner Name</th>
+          <th>Address</th>
+          <th>Contract Period</th>
+          <th>Paying Date</th>
+          <th>Months</th>
+          <th>Month Rent</th>
+          <th>Month Increment</th>
+          <th>Total Increment</th>
+          <th>Total Rent</th>
+          <th>Status</th>
+          <th>Delete</th>
+          <th>Generate Check</th>
+        </tr>
+      </thead>
+      {% for d in rent %}
+      <tr>
+        <td> {{d.agreementid}}</td>
+        <td> {{d.btsname}}</td>
+        <td>{{d.hownername}}</td>
+        <td>{{d.address}}</td>
+        <td>{{d.contractperiod}}</td>
+        <td>{{d.todate}}</td>
+        <td>{{d.totalmonth}}</td>
+        <td>{{d.monthrent}}</td>
+        <td>{{d.monthincrement}}</td>
+        <td>{{d.incrementamount}}</td>
+        <td>{{d.totalrent}}</td>
+        {%if d.status%}
+          <td> <span class="label label-success">Paid</span></td>
+          {% else %}
+          <td> <span class="label label-danger">Hold</span></td>
+          {% endif %}
+
+        <td><a class="btn btn-danger btn-xs" href="{% url 'admin_delete_rent' d.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+         <td><a class="btn btn-primary btn-xs" href="{% url 'view_rent' d.id  %}"><span class="glyphicon glyphicon-log-out"></span></a></td>
+      </tr>
+
+
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+{% endblock content %}
